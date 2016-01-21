@@ -9,3 +9,5 @@ COPY install.sh /
 
 # Empty data folder where later shop gets cloned/installed to dynamically
 COPY data /
+
+VOLUME /data

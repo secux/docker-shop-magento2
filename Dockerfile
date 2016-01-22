@@ -2,11 +2,11 @@ FROM tianon/true
 
 # TODO: Split later to docker-shop-base and use that as FROM (to have common tool scripts in all shop-containers)
 #RUN mkdir /base
-COPY ./base /base
+#COPY ./base /base
 
 # Scripts
-COPY ./list.sh /
-COPY ./install.sh /
+#COPY ./list.sh /
+#COPY ./install.sh /
 
 
 # Empty data folder where later shop gets cloned/installed to dynamically

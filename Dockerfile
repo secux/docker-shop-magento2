@@ -12,5 +12,7 @@ FROM tianon/true
 # Empty data folder where later shop gets cloned/installed to dynamically
 #RUN mkdir /data
 COPY ./data /data
+COPY ./config /config
 
 VOLUME /data
+VOLUME /config

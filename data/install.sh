@@ -13,9 +13,9 @@ cd  /www \
 echo "Automatically installing your Magento 2 shop with the following params: \n 
 --admin-firstname=Ad
 --admin-lastname=Minator
---admin-email=ad.minator@adminat.ro
+--admin-email=adminator@adminator.ro
 --admin-user=Adminator
---admin-password=secu117781
+--admin-password=sdr117781
 --base-url=http://localhost/
 --backend-frontname=admin
 --db-host=database
@@ -23,7 +23,9 @@ echo "Automatically installing your Magento 2 shop with the following params: \n
 --db-user=secu
 --db-password=secu"
 
-php bin/magento setup:install --admin-firstname=Ad --admin-lastname=Minator --admin-email=ad.minator@adminat.ro --admin-user=Adminator --admin-password=secu117781 --base-url=http://localhost:6090/ --backend-frontname=admin --db-host=database --db-name=secu --db-user=secu --db-password=secu
+php bin/magento setup:install --admin-firstname="Ad" --admin-lastname="Minator" --admin-email="adminator@adminator.ro" --admin-user="Adminator" --admin-password="sdr117781" --base-url="http://localhost:6090/" --backend-frontname="admin" --db-host="database" --db-name="secu" --db-user="secu" --db-password="secu"
+
+php bin/magento admin:user:unlock Adminator
 
 # php -r "phpinfo();"
 # php -m

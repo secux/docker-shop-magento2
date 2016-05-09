@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Running install.sh for $1"
+echo "Running install.sh for $1 using $2 as server name"
 
 echo "Cloning magento repo"
 git clone --branch $1 --depth 1 https://github.com/magento/magento2.git /www
@@ -16,14 +16,14 @@ echo "Automatically installing your Magento 2 shop with the following params: \n
 --admin-email=adminator@adminator.ro
 --admin-user=Adminator
 --admin-password=sdr117781
---base-url=http://localhost/
+--base-url=http://$2:6090/
 --backend-frontname=admin
 --db-host=database
 --db-name=secu
 --db-user=secu
 --db-password=secu"
 
-php bin/magento setup:install --admin-firstname="Ad" --admin-lastname="Minator" --admin-email="adminator@adminator.ro" --admin-user="Adminator" --admin-password="sdr117781" --base-url="http://localhost:6090/" --backend-frontname="admin" --db-host="database" --db-name="secu" --db-user="secu" --db-password="secu"
+php bin/magento setup:install --admin-firstname="Ad" --admin-lastname="Minator" --admin-email="adminator@adminator.ro" --admin-user="Adminator" --admin-password="sdr117781" --base-url="http://$2:6090/" --backend-frontname="admin" --db-host="database" --db-name="secu" --db-user="secu" --db-password="secu"
 
 php bin/magento admin:user:unlock Adminator
 

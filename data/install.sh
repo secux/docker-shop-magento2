@@ -2,17 +2,8 @@
 
 echo "Running install.sh for $1 using $2 as server name"
 
+mkdir -p /root/.composer
 cat << EOF > /root/.composer/auth.json
-{
-    "http-basic": {
-        "repo.magento.com": {
-            "username": "4b038199040d04ad1bcf5077f8aa2a3d",
-            "password": "01e681c7a142ad64d065d44cdbf07c4a"
-        }
-    }
-}
-EOF
-cat << EOF > /www/var/composer_home/auth.json
 {
     "http-basic": {
         "repo.magento.com": {
@@ -26,6 +17,18 @@ EOF
 echo "Copy magento repo"
 cd /www
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /www
+
+mkdir -p /www/var/composer_home
+cat << EOF > /www/var/composer_home/auth.json
+{
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "4b038199040d04ad1bcf5077f8aa2a3d",
+            "password": "01e681c7a142ad64d065d44cdbf07c4a"
+        }
+    }
+}
+EOF
 
 echo "Setting filesystem permissions"
 cd /www

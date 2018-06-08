@@ -2,20 +2,36 @@
 
 echo "Running install.sh for $1 using $2 as server name"
 
+cat << EOF > /root/.composer/auth.json
+{
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "4b038199040d04ad1bcf5077f8aa2a3d",
+            "password": "01e681c7a142ad64d065d44cdbf07c4a"
+        }
+    }
+}
+EOF
+cat << EOF > /www/var/composer_home/auth.json
+{
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "4b038199040d04ad1bcf5077f8aa2a3d",
+            "password": "01e681c7a142ad64d065d44cdbf07c4a"
+        }
+    }
+}
+EOF
+
 echo "Cloning magento repo"
-git clone --branch $1 --depth 1 https://github.com/magento/magento2.git /www
+cd /www
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /www
 
 echo "Setting filesystem permissions"
-chmod -R 777 /www/generated
-chmod -R 777 /www/pub/static
-chmod -R 777 /www/pub/media
-chmod -R 777 /www/var
-chmod -R 777 /www/app/etc
-
-echo "Installing composer packages"
-cd  /www \
-    && composer.phar self-update \
-    && composer.phar install --ignore-platform-reqs
+cd /www
+find var generated vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \;
+find var vendor generated pub/static pub/media app/etc -type d -exec chmod u+w {} \;
+chmod u+x bin/magento
 
 echo "Automatically installing your Magento 2 shop with the following params: \n 
 --admin-firstname=Ad
@@ -30,6 +46,7 @@ echo "Automatically installing your Magento 2 shop with the following params: \n
 --db-user=secu
 --db-password=secu"
 
+php bin/magento sampledata:deploy
 php bin/magento setup:install --admin-firstname="Ad" --admin-lastname="Minator" --admin-email="adminator@adminator.ro" --admin-user="Adminator" --admin-password="sdr117781" --base-url="http://$2:6090/" --backend-frontname="admin" --db-host="database" --db-name="secu" --db-user="secu" --db-password="secu"
 
 php bin/magento admin:user:unlock Adminator
@@ -37,8 +54,8 @@ php bin/magento admin:user:unlock Adminator
 # php -r "phpinfo();"
 # php -m
 
-echo "Installing Magento 2 static files"
-php bin/magento setup:static-content:deploy
+#echo "Installing Magento 2 static files"
+#php bin/magento setup:static-content:deploy
 
 echo "Setting filesystem permissions"
 chown -R www-data /www

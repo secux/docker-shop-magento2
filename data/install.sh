@@ -23,7 +23,7 @@ cat << EOF > /www/var/composer_home/auth.json
 }
 EOF
 
-echo "Cloning magento repo"
+echo "Copy magento repo"
 cd /www
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /www
 

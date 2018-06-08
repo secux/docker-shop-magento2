@@ -16,7 +16,7 @@ EOF
 
 echo "Copy magento repo"
 cd /www
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /www
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$1 /www
 
 mkdir -p /www/var/composer_home
 cat << EOF > /www/var/composer_home/auth.json

@@ -64,4 +64,8 @@ echo "Setting filesystem permissions"
 chown -R www-data /www
 chgrp -R www-data /www
 
+php bin/magento setup:static-content:deploy -f
+php bin/magento cache:flush
+php bin/magento indexer:reindex
+
 echo "Installation completed"

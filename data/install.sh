@@ -37,4 +37,10 @@ echo "Setting filesystem permissions"
 chown -R www-data /www
 chgrp -R www-data /www
 
+chmod -R 777 /www/generated
+chmod -R 777 /www/pub/static
+chmod -R 777 /www/pub/media
+chmod -R 777 /www/var
+chmod -R 777 /www/app/etc
+
 echo "Installation completed"
